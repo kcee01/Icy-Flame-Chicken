@@ -58,10 +58,16 @@ class RestaurantSystem:
         cash_sales = totals.get("cash", 0) or 0
         return cash_sales - self.total_expenses()
 
+    def total_electronic_payments(self):
+        totals = self.total_sales_by_payment()
+        electronic_total = sum(value for key, value in totals.items() if key != "cash")
+        return electronic_total
+
     def summary_text(self):
         lines = ["=== Daily Summary ===", "Sales by Payment Type:"]
         for method, total in self.total_sales_by_payment().items():
             lines.append(f"  {method}: {total}")
+        lines.append(f"Total Electronic Payments: {self.total_electronic_payments()}")
         lines.append(f"Total Expenses: {self.total_expenses()}")
         lines.append(f"Cash in Hand (cash sales - expenses): {self.cash_in_hand()}")
         return "\n".join(lines)
@@ -93,6 +99,7 @@ class RestaurantSystem:
         ws_summary.append(["Sales by Payment Type"])
         for method, total in self.total_sales_by_payment().items():
             ws_summary.append([method, total])
+        ws_summary.append(["Total Electronic Payments", self.total_electronic_payments()])
         ws_summary.append([])
         ws_summary.append(["Total Expenses", self.total_expenses()])
         ws_summary.append(["Cash in Hand (cash-expenses)", self.cash_in_hand()])
