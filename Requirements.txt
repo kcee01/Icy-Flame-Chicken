@@ -1,0 +1,13 @@
+# External dependencies required by the project
+# Note: modules like sqlite3, datetime, and tkinter are part of the Python standard library
+openpyxl>=3.0.0
+
+# Installation (PowerShell example)
+# 1. Create and activate a virtual environment (recommended):
+#    python -m venv .venv
+#    .\.venv\Scripts\Activate.ps1
+# 2. Install dependencies from this file:
+#    python -m pip install -r requirements.txt
+
+# Alternative: install single package directly (if you don't want a venv):
+#    python -m pip install openpyxl
